@@ -100,16 +100,19 @@ int remove_by_element(t_ordered_list *list, int element) {
 int search(t_ordered_list *list, int element) {
     int esquerda = 0;
     int direita = list->n-1;
-    int meio = (esquerda + direita) / 2;
+
     while (esquerda <= direita) {
+        int meio = (esquerda + direita) / 2;
+
         if(list->items[meio] == element) {
             return meio;
-        } else if (list->items[meio] > element) {
+        }
+
+        if (list->items[meio] > element) {
             direita = meio - 1;
         } else {
             esquerda = meio + 1;
         }
-        meio = (direita + esquerda) / 2;
     }
     
     return NOT_FOUND;
