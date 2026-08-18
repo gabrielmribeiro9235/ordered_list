@@ -144,24 +144,26 @@ int size(t_ordered_list *list) {
 }
 
 t_ordered_list* merge(t_ordered_list *l1, t_ordered_list *l2) {
-    t_ordered_list *result = create_list((l1->n + l2->n) * 10);
-    int i = 0, j = 0;
+    t_ordered_list *result = create_list(l1->n + l2->n);
+    int i = 0, j = 0, k = 0;
 
     while (i < l1->n && j < l2->n) {
         if (l1->items[i] < l2->items[j]) {
-            insert(result, l1->items[i++]);
+            result->items[k++] = l1->items[i++];
         } else {
-            insert(result, l2->items[j++]);
+            result->items[k++] = l2->items[j++];
         }
     }
 
     while (i < l1->n) {
-        insert(result, l1->items[i++]);
+        result->items[k++] = l1->items[i++];
     }
 
     while (j < l2->n) {
-        insert(result, l2->items[j++]);
+        result->items[k++] = l2->items[j++];
     }
+
+    result->n = l1->n + l2->n;
     
     return result;
 }
