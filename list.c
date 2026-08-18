@@ -26,8 +26,21 @@ t_ordered_list* create_list(int max) {
     return list;
 }
 
+int realloc_list(t_ordered_list *list) {
+    int *temp = realloc(list->items, (list->max*2) * sizeof(int));
+
+    if (temp == NULL) {
+        return ERROR;
+    }
+
+    list->items = temp;
+    list->max *= 2;
+
+    return SUCESS;
+}
+
 int insert(t_ordered_list *list, int number) {
-    if (list->n + 1 > list->max) {
+    if (list->n + 1 > list->max && realloc_list(list) == ERROR) {
         return ERROR;
     }
 
