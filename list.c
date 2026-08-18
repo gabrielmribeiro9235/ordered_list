@@ -8,6 +8,10 @@
 #define NOT_FOUND -1
 
 t_ordered_list* create_list(int max) {
+    if (max <= 0) {
+        exit(1);
+    }
+
     t_ordered_list *list = malloc(sizeof(t_ordered_list));
 
     if (list == NULL) {
