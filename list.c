@@ -17,6 +17,7 @@ t_ordered_list* create_list(int max) {
     list->items = malloc(sizeof(int) * max);
 
     if (list->items == NULL) {
+        free(list);
         exit(1);
     }
 
