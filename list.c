@@ -7,12 +7,6 @@
 #define TRUE 1
 #define NOT_FOUND -1
 
-typedef struct {
-    int max;
-    int n;
-    int *items;
-} t_ordered_list;
-
 t_ordered_list* create_list(int max) {
     t_ordered_list *list = malloc(sizeof(t_ordered_list));
 

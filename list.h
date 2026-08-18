@@ -1,7 +1,11 @@
 #ifndef LIST_H
 #define LIST_H
 
-typedef struct t_ordered_list;
+typedef struct {
+    int max;
+    int n;
+    int *items;
+} t_ordered_list;
 t_ordered_list* create_list(int max);
 int insert(t_ordered_list *list, int number);
 int remove_by_index(t_ordered_list *list, int index);
