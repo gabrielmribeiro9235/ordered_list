@@ -114,7 +114,7 @@ int search(t_ordered_list *list, int element) {
             esquerda = meio + 1;
         }
     }
-    
+
     return NOT_FOUND;
 }
 
@@ -192,7 +192,7 @@ int equals(t_ordered_list *l1, t_ordered_list *l2) {
 }
 
 int is_empty(t_ordered_list *list) {
-    return list->n == 0 ? TRUE : FALSE;
+    return list->n == 0;
 }
 
 void clear(t_ordered_list *list) {
