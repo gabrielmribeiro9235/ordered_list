@@ -10,7 +10,7 @@ POIS QUALQUER CÓDIGO DE ERRO INTEIRO PODE SER CONFUNDIDO COM O INTEIRO DA POSI�
 
 2) ESTRATÉGIA PARA AUMENTAR A MEMÓRIA, QUANDO O USUÁRIO QUER INSERIR MAIS ITENS
 DO QUE O ALOCADO PREVIAMENTE:
-CADA VEZ QUE O NÚMERO DE ELEMENTOS IGUALA O MÁXIMO, REALOCA O DOBRO DO MÁXIMO INICIAL E RESETA O MÁXIMO PARA 
+CADA VEZ QUE O NÚMERO DE ELEMENTOS IGUALA O MÁXIMO, REALOCA O DOBRO DO MÁXIMO ATUAL E RESETA O MÁXIMO PARA 
 O SEU DOBRO.
 */
 
@@ -19,105 +19,312 @@ O SEU DOBRO.
 #include "list.h"
 
 int main() {
-    // Cria lista
-    t_ordered_list *teste = create_list(1000);
+    char line[] = "-------------------------------------\n";
 
-    // Insere elementos
-    insert(teste, 10);
-    insert(teste, 19);
-    insert(teste, 1);
-    insert(teste, -4);
-    insert(teste, 10);
-    insert(teste, 11);
-    insert(teste, 20);
-    printf("Verifica inserção\n");
-    for (int i = 0; i < teste->n; i++) {
-        printf("%d\t", teste->items[i]);
-    }
+    printf("%s", line);
+    printf("Criando lista...\n");
 
-    // Remove um elemento pelo índice
-    remove_by_index(teste, 1);
-    printf("\n\nVerifica remoção pelo índice\n");
-    for (int i = 0; i < teste->n; i++) {
-        printf("%d\t", teste->items[i]);
-    }
+    int max;
+    t_ordered_list *main_list;
     
-    // Remove um elemento dado
-    remove_by_element(teste, 19);
-    printf("\n\nVerifica remoção de um elemento dado\n");
-    for (int i = 0; i < teste->n; i++) {
-        printf("%d\t", teste->items[i]);
-    }
+    printf("Insira o tamanho da lista: ");
+    scanf("%d", &max);
+    
+    main_list = create_list(max);
 
-    printf("\n\nBusca binário:\n");
-    printf("10 está no índice %d\n\n", search(teste, 10));
+    printf("\nLista criada com sucesso!\n");
+    
+    int option = 14;
+    do {
+        switch (option) {
+        case 1: {
+            int element;
+            
+            printf("Digite o elemento que quer inserir na lista:\n");
+            scanf("%d", &element);
+            
+            if (insert(main_list, element)) {
+                printf("\nElemento inserido com sucesso\n");
+            } else {
+                printf("\nErro ao inserir o elemento\n");
+            }
 
-    printf("Busca sequencial:\n");
-    printf("10 está no índice %d\n\n", index_of(teste, 10));
+            break;
+        }
+        case 2: {
+            int index;
+            
+            printf("Digite o índice que deseja excluir:\n");
+            scanf("%d", &index);
+            
+            if (remove_by_index(main_list, index)) {
+                printf("\nRemoção feita com sucesso\n");
+            } else {
+                printf("\nÍndice não encontrado\n");
+            }
 
-    printf("Busca o elemento de um índice dado:\n");
-    printf("O elemento da posição 3 é %d\n\n", get(teste, 3));
+            break;
+        }
+        case 3: {
+            int element;
+            
+            printf("Digite o elemento que deseja excluir:\n");
+            scanf("%d", &element);
+            
+            if (remove_by_element(main_list, element)) {
+                printf("\nRemoção feita com sucesso\n");
+            } else {
+                printf("\nElemento não encontrado\n");
+            }
 
-    printf("Conta o número de vezes que um elemento aparece:\n");
-    printf("O 500 aparece %d\n\n", count(teste, 500));
+            break;
+        }
+        case 4: {
+            int element;
+            
+            printf("Digite o elemento que deseja buscar:\n");
+            scanf("%d", &element);
+            
+            int index = search(main_list, element);
+            if (index == NOT_FOUND) {
+                printf("\nElemento não encontrado\n");
+            } else {
+                printf("\n%d está no índice: %d\n", element, index);
+            }
 
-    // Merge
-    t_ordered_list *l1 = create_list(100), *l2 = create_list(100);
-    insert(l1, 1);
-    insert(l1, 2);
-    insert(l1, 10);
-    insert(l2, 1);
-    insert(l2, 2);
-    insert(l2, 10);
-    printf("Lista l1:\n");
-    for (int i = 0; i < l1->n; i++) {
-        printf("%d\t", l1->items[i]);
-    }
-    printf("\nLista l2:\n");
-    for (int i = 0; i < l2->n; i++) {
-        printf("%d\t", l2->items[i]);
-    }
-    t_ordered_list *merge_list = merge(l1, l2);
-    printf("\n\nVerifica o merge\n");
-    for (int i = 0; i < merge_list->n; i++) {
-        printf("%d\t", merge_list->items[i]);
-    }
+            break;
+        }
+        case 5: {
+            int element;
+            
+            printf("Digite o elemento que deseja buscar:\n");
+            scanf("%d", &element);
+            
+            int index = index_of(main_list, element);
+            if (index == NOT_FOUND) {
+                printf("\nElemento não encontrado\n");
+            } else {
+                printf("\n%d está no índice: %d\n", element, index);
+            }
 
-    printf("\n\nVerifica se l1 e l2 são iguais\n");
-    if (equals(l1, l2)) {
-        printf("LISTAS IGUAIS\n");
-    } else {
-        printf("LISTAS DIFERENTES\n");
-    }
+            break;
+        }
+        case 6: {
+            int index;
 
-    printf("\n\nVerifica lista vazia\n");
-    t_ordered_list *lista_vazia = create_list(100);
-    if (is_empty(lista_vazia)) {
-        printf("LISTA VAZIA\n");
-    } else {
-        printf("LISTA NÃO VAZIA\n");
-    }
+            printf("Insira o índice que deseja buscar (ATENÇÃO: SE INSERIR UM ÍNDICE INVÁLIDO, O PROGRAMA VAI PARAR):\n");
+            scanf("%d", &index);
 
-    insert(lista_vazia, 1);
-    insert(lista_vazia, 1);
-    insert(lista_vazia, 1);
+            printf("\nO elemento do índice %d é: %d\n", index, get(main_list, index));
+            
+            break;
+        }
+        case 7: {
+            int element;
 
-    printf("\nTorna lista vazia\n");
-    clear(lista_vazia);
-    if (is_empty(lista_vazia)) {
-        printf("LISTA VAZIA\n");
-    } else {
-        printf("LISTA NÃO VAZIA\n");
-    }
+            printf("Insira o elemento que deseja saber o número de ocorrências:\n");
+            scanf("%d", &element);
 
-    printf("\n\nLibera memórias\n");
-    destroy(&teste);
-    destroy(&l1);
-    destroy(&l2);
-    destroy(&merge_list);
-    destroy(&lista_vazia);
+            printf("\nO elemento %d aparece na lista: %d vezes\n", element, count(main_list, element));
+            
+            break;
+        }
+        case 8:
+            printf("O tamanho atual da lista é: %d\n", size(main_list));
+        
+            break;
+        case 9: {
+            int size1, size2;
 
-    printf("\nFIM\n");
+            printf("Insira o tamanho da primeira lista: ");
+            scanf("%d", &size1);
+            printf("\n");
 
+            if (size1 <= 0) {
+                printf("Tamanho inválido, voltando ao menu...\n");
+                break;
+            }
+
+            int flag = 0;
+            t_ordered_list *l1 = create_list(size1);
+            for (int i = 0; i < size1; i++) {
+                int element;
+                
+                printf("Insira o elemento %d da lista 1: ", i);
+                scanf("%d", &element);
+
+                if (insert(l1, element) == ERROR) {
+                    printf("Erro ao inserir elemento, voltando ao menu...\n");
+                    flag = 1;
+                    break;
+                }
+            }
+
+            if (flag) {
+                destroy(&l1);
+                break;
+            }
+            
+            printf("\nInsira o tamanho da segunda lista: ");
+            scanf("%d", &size2);
+            printf("\n");
+
+            if (size2 <= 0) {
+                printf("Tamanho inválido, voltando ao menu...\n");
+                destroy(&l1);
+                break;
+            }
+
+            t_ordered_list *l2 = create_list(size2);
+            for (int i = 0; i < size2; i++) {
+                int element;
+                
+                printf("Insira o elemento %d da lista 2: ", i);
+                scanf("%d", &element);
+
+                if (insert(l2, element) == ERROR) {
+                    printf("Erro ao inserir elemento, voltando ao menu...\n");
+                    flag = 1;
+                    break;
+                }
+            }
+
+            if (flag) {
+                destroy(&l1);
+                destroy(&l2);
+                break;
+            }
+
+            destroy(&main_list);
+            main_list = merge(l1, l2);
+
+            destroy(&l1);
+            destroy(&l2);
+
+            break;
+        }
+        case 10: {
+            int size1, size2;
+
+            printf("Insira o tamanho da primeira lista: ");
+            scanf("%d", &size1);
+            printf("\n");
+
+            if (size1 <= 0) {
+                printf("Tamanho inválido, voltando ao menu...\n");
+                break;
+            }
+
+            int flag = 0;
+            t_ordered_list *l1 = create_list(size1);
+            for (int i = 0; i < size1; i++) {
+                int element;
+                
+                printf("Insira o elemento %d da lista 1: ", i);
+                scanf("%d", &element);
+
+                if (insert(l1, element) == ERROR) {
+                    printf("Erro ao inserir elemento, voltando ao menu...\n");
+                    flag = 1;
+                    break;
+                }
+            }
+
+            if (flag) {
+                destroy(&l1);
+                break;
+            }
+
+            printf("\nInsira o tamanho da segunda lista: ");
+            scanf("%d", &size2);
+            printf("\n");
+
+            if (size2 <= 0) {
+                printf("Tamanho inválido, voltando ao menu...\n");
+                destroy(&l1);
+                break;
+            }
+            
+            t_ordered_list *l2 = create_list(size2);
+            for (int i = 0; i < size2; i++) {
+                int element;
+                
+                printf("Insira o elemento %d da lista 2: ", i);
+                scanf("%d", &element);
+
+                if (insert(l2, element) == ERROR) {
+                    printf("Erro ao inserir elemento, voltando ao menu...\n");
+                    flag = 1;
+                    break;
+                }
+            }
+
+            if (flag) {
+                destroy(&l1);
+                destroy(&l2);
+                break;
+            }
+
+            if (equals(l1, l2)) {
+                printf("\nAs duas listas criadas são iguais\n");
+            } else {
+                printf("\nAs duas listas criadas não são iguais\n");
+            }
+
+            destroy(&l1);
+            destroy(&l2);
+
+            break;
+        }
+        case 11:
+            if (is_empty(main_list)) {
+                printf("A lista está vazia\n");
+            } else {
+                printf("A lista não está vazia\n");
+            }
+
+            break;
+        case 12:
+            clear(main_list);
+            printf("Lista esvaziada\n");
+
+            break;
+        case 13:
+            print_list(main_list);
+
+            break;
+        default:
+            if (option != 14) { 
+                printf("Escolha inválida\n");
+            }
+            break;
+        }
+        printf("%s", line);
+        printf(" 1 - Inserir elemento na lista\n");
+        printf(" 2 - Remover elemento por índice\n");
+        printf(" 3 - Remover um elemento dado\n");
+        printf(" 4 - Buscar um elemento dado (busca binária)\n");
+        printf(" 5 - Buscar um elemento dado (busca sequencial)\n");
+        printf(" 6 - Buscar o elemento de um índice dado\n");
+        printf(" 7 - Número de vezes que um dado elemento aparece na lista\n");
+        printf(" 8 - Verificar tamanho atual da lista\n");
+        printf(" 9 - Montar a lista a partir de um merge de outras duas novas listas (ATENÇÃO: isso destrói a lista atual)\n");
+        printf("10 - Criar duas novas listas e verificar se elas são iguais\n");
+        printf("11 - Verificar se a lista está vazia\n");
+        printf("12 - Esvaziar uma lista\n");
+        printf("13 - Exibir lista\n");
+        printf("14 - Sair\n");
+        printf("%s", line);
+        printf("Sua escolha: ");
+        scanf("%d", &option);
+        printf("%s", line);
+    } while (option != 14);
+
+    printf("Liberando memória...\n");
+
+    destroy(&main_list);
+
+    printf("-----------FIM DO PROGRAMA-----------");
+    
     return 0;
 }
