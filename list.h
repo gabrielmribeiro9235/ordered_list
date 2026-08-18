@@ -1,6 +1,9 @@
 #ifndef LIST_H
 #define LIST_H
 
+#define ERROR 0
+#define SUCCESS 1
+#define NOT_FOUND -1
 typedef struct {
     int max;
     int n;

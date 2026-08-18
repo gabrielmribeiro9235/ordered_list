@@ -1,10 +1,6 @@
 #include <stdlib.h>
 #include "list.h"
 
-#define ERROR 0
-#define SUCCESS 1
-#define NOT_FOUND -1
-
 t_ordered_list* create_list(int max) {
     if (max <= 0) {
         exit(1);
