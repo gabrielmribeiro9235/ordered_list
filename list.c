@@ -188,9 +188,11 @@ void clear(t_ordered_list *list) {
     list->n = 0;
 }
 
-void destroy(t_ordered_list *list) {
-    free(list->items);
-    list->items = NULL;
-    free(list);
-    list = NULL;
+void destroy(t_ordered_list **list) {
+    if (*list == NULL) {
+        return;
+    }
+    free((*list)->items);
+    free(*list);
+    *list = NULL;
 }

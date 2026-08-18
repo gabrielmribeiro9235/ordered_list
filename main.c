@@ -106,11 +106,11 @@ int main() {
     }
 
     printf("\n\nLibera memórias\n");
-    destroy(teste);
-    destroy(l1);
-    destroy(l2);
-    destroy(merge_list);
-    destroy(lista_vazia);
+    destroy(&teste);
+    destroy(&l1);
+    destroy(&l2);
+    destroy(&merge_list);
+    destroy(&lista_vazia);
 
     printf("\nFIM\n");
 
