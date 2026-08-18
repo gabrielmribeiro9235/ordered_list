@@ -86,14 +86,15 @@ int remove_by_index(t_ordered_list *list, int index) {
 }
 
 int remove_by_element(t_ordered_list *list, int element) {
-    for (int i = 0; i < list->n; i++) {
-        if (list->items[i] == element) {
-            remove_by_index(list, i);
-            return SUCESS;
-        }
+    int index_of_element = index_of(list, element);
+
+    if (index_of_element == NOT_FOUND) {
+        return ERROR;
     }
     
-    return ERROR;
+    remove_by_index(list, index_of_element);
+
+    return SUCESS;
 }
 
 int search(t_ordered_list *list, int element) {
