@@ -61,7 +61,7 @@ int insert(t_ordered_list *list, int number) {
         }
     }
 
-    for (int i = list->n + 1; i > index; i--) {
+    for (int i = list->n; i > index; i--) {
         list->items[i] = list->items[i-1];
     }
 
