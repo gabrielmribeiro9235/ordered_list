@@ -1,3 +1,17 @@
+/*
+CAUÃ HABERMANN PEREIRA
+GABRIEL MELO RIBEIRO
+GUILHERME LEONARDO GREGÓRIO
+
+1) PONTOS FORTES: BUSCA RÁPIDA (BUSCA BINÁRIA É O(LOG N)) E NÃO NECESSITA FAZER ORDENAÇÃO;
+PONTOS FRACOS: INSERÇÃO MAIS DEVAGAR (O(N)) E REMOÇÃO MAIS DEVAGAR (O(N)).
+
+2) ESTRATÉGIA PARA AUMENTAR A MEMÓRIA, QUANDO O USUÁRIO QUER INSERIR MAIS ITENS
+DO QUE O ALOCADO PREVIAMENTE:
+CADA VEZ QUE O NÚMERO DE ELEMENTOS IGUALA O MÁXIMO, REALOCA O DOBRO DO MÁXIMO INICIAL E RESETA O MÁXIMO PARA 
+O SEU DOBRO.
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "list.h"
@@ -14,38 +28,33 @@ int main() {
     insert(teste, 10);
     insert(teste, 11);
     insert(teste, 20);
-    // Verifica inserção
-    printf("\n");
+    printf("Verifica inserção\n");
     for (int i = 0; i < teste->n; i++) {
         printf("%d\t", teste->items[i]);
     }
-    printf("\n");
 
     // Remove um elemento pelo índice
     remove_by_index(teste, 1);
-    // Verifica remoção
+    printf("\n\nVerifica remoção pelo índice\n");
     for (int i = 0; i < teste->n; i++) {
         printf("%d\t", teste->items[i]);
     }
-    printf("\n");
-
+    
     // Remove um elemento dado
     remove_by_element(teste, 19);
-    // Verifica remoção
+    printf("\n\nVerifica remoção de um elemento dado\n");
     for (int i = 0; i < teste->n; i++) {
         printf("%d\t", teste->items[i]);
     }
-    printf("\n");
-    printf("\n");
 
-    // Busca binário
-    printf("10 está no índice %d\n", search(teste, 10));
-    // Busca sequencial
-    printf("10 está no índice %d\n", index_of(teste, 10));
-    // Busca o elemento de uma posição
-    printf("O elemento da posição 3 é %d\n", get(teste, 3));
-    // Conta o número de vezes que um elemento aparece
-    printf("O 500 aparece %d\n", count(teste, 500));
+    printf("\n\nBusca binário:\n");
+    printf("10 está no índice %d\n\n", search(teste, 10));
+    printf("Busca sequencial:\n");
+    printf("10 está no índice %d\n\n", index_of(teste, 10));
+    printf("Busca o elemento de uma posição:\n");
+    printf("O elemento da posição 3 é %d\n\n", get(teste, 3));
+    printf("Conta o número de vezes que um elemento aparece:\n");
+    printf("O 500 aparece %d\n\n", count(teste, 500));
 
     // Merge
     t_ordered_list *l1 = create_list(100), *l2 = create_list(100);
@@ -55,23 +64,28 @@ int main() {
     insert(l2, 1);
     insert(l2, 2);
     insert(l2, 10);
+    printf("Lista l1:\n");
+    for (int i = 0; i < l1->n; i++) {
+        printf("%d\t", l1->items[i]);
+    }
+    printf("\nLista l2:\n");
+    for (int i = 0; i < l2->n; i++) {
+        printf("%d\t", l2->items[i]);
+    }
     t_ordered_list *merge_list = merge(l1, l2);
-    // Verifica o merge
-    printf("\n");
+    printf("\n\nVerifica o merge\n");
     for (int i = 0; i < merge_list->n; i++) {
         printf("%d\t", merge_list->items[i]);
     }
-    printf("\n");
 
-    // Verifica se duas listas são iguais
+    printf("\n\nVerifica se l1 e l2 são iguais\n");
     if (equals(l1, l2)) {
         printf("LISTAS IGUAIS\n");
     } else {
         printf("LISTAS DIFERENTES\n");
     }
-    printf("\n");
 
-    // Verifica lista vazia
+    printf("\n\nVerifica lista vazia\n");
     t_ordered_list *lista_vazia = create_list(100);
     if (is_empty(lista_vazia)) {
         printf("LISTA VAZIA\n");
@@ -82,21 +96,23 @@ int main() {
     insert(lista_vazia, 1);
     insert(lista_vazia, 1);
     insert(lista_vazia, 1);
-    // Torna lista vazia
+
+    printf("\nTorna lista vazia\n");
     clear(lista_vazia);
     if (is_empty(lista_vazia)) {
         printf("LISTA VAZIA\n");
     } else {
         printf("LISTA NÃO VAZIA\n");
     }
-    printf("\n");
 
-    // Libera memórias
+    printf("\n\nLibera memórias\n");
     destroy(teste);
     destroy(l1);
     destroy(l2);
     destroy(merge_list);
     destroy(lista_vazia);
+
+    printf("\nFIM\n");
 
     return 0;
 }
