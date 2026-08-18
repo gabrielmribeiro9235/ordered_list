@@ -2,9 +2,7 @@
 #include "list.h"
 
 #define ERROR 0
-#define FALSE 0
 #define SUCCESS 1
-#define TRUE 1
 #define NOT_FOUND -1
 
 t_ordered_list* create_list(int max) {
@@ -179,16 +177,16 @@ t_ordered_list* merge(t_ordered_list *l1, t_ordered_list *l2) {
 
 int equals(t_ordered_list *l1, t_ordered_list *l2) {
     if (l1->n != l2->n) {
-        return FALSE;
+        return 0;
     }
 
     for (int i = 0; i < l1->n; i++) {
         if (l1->items[i] != l2->items[i]) {
-            return FALSE;
+            return 0;
         }
     }
     
-    return TRUE;
+    return 1;
 }
 
 int is_empty(t_ordered_list *list) {
