@@ -121,7 +121,7 @@ int index_of(t_ordered_list *list, int element) {
 
 int get(t_ordered_list *list, int index) {
     if (index < 0 || index >= list->n) {
-        return NOT_FOUND;
+        exit(1);
     }
 
     return list->items[index];

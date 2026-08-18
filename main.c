@@ -4,7 +4,9 @@ GABRIEL MELO RIBEIRO
 GUILHERME LEONARDO GREGÓRIO
 
 1) PONTOS FORTES: BUSCA RÁPIDA (BUSCA BINÁRIA É O(LOG N)) E NÃO NECESSITA FAZER ORDENAÇÃO;
-PONTOS FRACOS: INSERÇÃO MAIS DEVAGAR (O(N)) E REMOÇÃO MAIS DEVAGAR (O(N)).
+PONTOS FRACOS: INSERÇÃO MAIS DEVAGAR (O(N)), REMOÇÃO MAIS DEVAGAR (O(N)) E NO GET(LISTA, INDEX), CASO O USUÁRIO PASSE UM NÚMERO 
+INVÁLIDO, É NECESSÁRIO SAIR DO PROGRAMA E NÃO DÁ PARA RETORNAR UM INTEIRO QUE FAÇA O USUÁRIO ENTENDER O ERRO,
+POIS QUALQUER CÓDIGO DE ERRO INTEIRO PODE SER CONFUNDIDO COM O INTEIRO DA POSIÇÃO INDEX.
 
 2) ESTRATÉGIA PARA AUMENTAR A MEMÓRIA, QUANDO O USUÁRIO QUER INSERIR MAIS ITENS
 DO QUE O ALOCADO PREVIAMENTE:
@@ -49,10 +51,13 @@ int main() {
 
     printf("\n\nBusca binário:\n");
     printf("10 está no índice %d\n\n", search(teste, 10));
+
     printf("Busca sequencial:\n");
     printf("10 está no índice %d\n\n", index_of(teste, 10));
-    printf("Busca o elemento de uma posição:\n");
+
+    printf("Busca o elemento de um índice dado:\n");
     printf("O elemento da posição 3 é %d\n\n", get(teste, 3));
+
     printf("Conta o número de vezes que um elemento aparece:\n");
     printf("O 500 aparece %d\n\n", count(teste, 500));
 
