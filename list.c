@@ -3,7 +3,7 @@
 
 #define ERROR 0
 #define FALSE 0
-#define SUCESS 1
+#define SUCCESS 1
 #define TRUE 1
 #define NOT_FOUND -1
 
@@ -41,7 +41,7 @@ int realloc_list(t_ordered_list *list) {
     list->items = temp;
     list->max *= 2;
 
-    return SUCESS;
+    return SUCCESS;
 }
 
 int insert(t_ordered_list *list, int number) {
@@ -69,7 +69,7 @@ int insert(t_ordered_list *list, int number) {
     
     list->n++;
 
-    return SUCESS;
+    return SUCCESS;
 }
 
 int remove_by_index(t_ordered_list *list, int index) {
@@ -82,7 +82,7 @@ int remove_by_index(t_ordered_list *list, int index) {
     }
 
     list->n--;
-    return SUCESS;    
+    return SUCCESS;
 }
 
 int remove_by_element(t_ordered_list *list, int element) {
@@ -94,7 +94,7 @@ int remove_by_element(t_ordered_list *list, int element) {
     
     remove_by_index(list, index_of_element);
 
-    return SUCESS;
+    return SUCCESS;
 }
 
 int search(t_ordered_list *list, int element) {
