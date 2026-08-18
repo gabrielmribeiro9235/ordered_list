@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdio.h>
 #include "list.h"
 
 t_ordered_list* create_list(int max) {
@@ -200,4 +201,12 @@ void destroy(t_ordered_list **list) {
     free((*list)->items);
     free(*list);
     *list = NULL;
+}
+
+void print_list(t_ordered_list *list) {
+    printf("[  ");
+    for (int i = 0; i < list->n; i++) {
+        printf("%d  ", list->items[i]);
+    }
+    printf("]\n");
 }

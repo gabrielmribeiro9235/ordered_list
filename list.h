@@ -23,5 +23,6 @@ int equals(t_ordered_list *l1, t_ordered_list *l2);
 int is_empty(t_ordered_list *list); 
 void clear(t_ordered_list *list);
 void destroy(t_ordered_list **list);
+void print_list(t_ordered_list *list);
 
 #endif
